@@ -1,5 +1,5 @@
 <?php
-    if (isset($_POST["submit"]))
+    if (isset($_POST["submit"]) && $_POST['randcheck_add_product']==$_SESSION['rand_add_product'] )
     {
         // session
         $_SESSION['Masp'] = $_POST['txtMasp'];
@@ -34,19 +34,8 @@
                 $motaSP = $_POST['textMota'];
                 $soluong = $_POST['txtSoluong'];
                 insert_sp($masp, $maloai, $tensp, $gia, $soluong, $mancc, $ngaysanxuat, $hansudung, $dungtich, $motaSP, $ngaynhaphang, $trangthai);
-                
-                echo 
-                "
-                    <script type='text/javascript'>
-                        setTimeout(function () { 
-                            Swal.fire({
-                                type: 'success',
-                                title: 'Thêm sản phẩm thành công !',
-                                timer: 1000
-                            });
-                        }, 100);
-                    </script>
-                ";
+
+                // xóa sản session
                 $_SESSION['Masp'] = '';
                 $_SESSION['Maloai'] = '';
                 $_SESSION['Mancc'] = '';
@@ -59,6 +48,21 @@
                 $_SESSION['trangthai'] = '';
                 $_SESSION['mota'] = '';
                 $_SESSION['soluong'] = '';
+
+                // echo 
+                // "
+                //     <script type='text/javascript'>
+                //         setTimeout(function () { 
+                //             Swal.fire({
+                //                 type: 'success',
+                //                 title: 'Thêm sản phẩm thành công !',
+                //                 showConfirmButton: false,
+                //                 timer: 1000
+                //             });
+                //         }, 1);
+                //     </script>
+                // ";
+                echo '<script> window.location = "?page=upload&&masp='.$masp.'"; </script>';
             }
             catch(Throwable $th){}
         }
@@ -96,6 +100,10 @@
     <div class="form-group row">
         <label for="inputEmail3" class="col-sm-2 col-form-label">Mã sản phẩm <span style="color:red;">(*)</span>:</label>
         <div class="col-sm-10">
+            <!-- deactive reload -->
+            <?php $rand=rand(); $_SESSION['rand_add_product']=$rand; ?>
+            <input type="hidden" value="<?php echo $rand; ?>" name="randcheck_add_product" />
+
             <!-- mã sản phẩm -->
             <input 
                 type="text" 
@@ -115,6 +123,7 @@
                     }
                 ?>
             </div>
+
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="inputState">Mã loại <span style="color:red;">(*)</span>:</label>
@@ -204,6 +213,7 @@
                 </div>
 
             </div>
+
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="inputState">Ngày nhập <span style="color:red;">(*)</span>:</label>
@@ -388,5 +398,6 @@
         </div>
     </div> <br>
 
-</form>
-<!-- END FORM -->
+</form><!-- /FORM -->
+    
+

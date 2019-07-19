@@ -29,7 +29,6 @@
   <!-- AdminLTE App -->
   <script src="./../assets/js/adminlte.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-
   <!-- function delete list product -->
   <!-- style css -->
   <style>

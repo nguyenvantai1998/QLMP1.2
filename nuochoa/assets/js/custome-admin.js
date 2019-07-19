@@ -55,11 +55,13 @@ $(document).ready(function () {
                         th.parents(".box-gallery").hide();
                     }
                 })
-                Swal.fire(
-                    'Deleted!',
-                    'Ảnh của bạn đã bị xóa.',
-                    'success'
-                )
+                Swal.fire({
+                    position: 'center',
+                    type: 'success',
+                    title: 'Xóa ảnh thành công.',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             }
         });
     });

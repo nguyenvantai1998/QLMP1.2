@@ -120,48 +120,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- góp ý kiến -->
-                <!-- <form id="comment-form" class="form-review" action="" method="post">
-                    <h3 class="title"> Gửi đánh giá của bạn </h3>
-                    <div class="inner">
-                        <p> Chọn đánh giá của bạn
-                            <span class="rating"><span class="w5" id="icon-rate"></span></span>
-                        </p>
-                        <div class="row-1">
-                            <div class="field-comment-content">
-                                <textarea class="comment-content" placeholder="Nội dung (*)"></textarea>
-                            </div>
-                        </div>
-                        <div class="row-2">
-                            <div class="field-comment-name">
-                                <input type="text" class="comment-name" placeholder="Họ và tên (*)">
-                            </div>
-
-                            <div class="field-comment-email">
-                                <input type="email" class="comment-email" placeholder="Email">
-                            </div>
-                        </div>
-                        <div class="row-3">
-                            <div class="g-recaptcha" data-sitekey="6LcjqBkUAAAAACTQ6yt47UwFSXQ5o-n9Q6D3Y_Zz">
-                                <div style="width: 100%; height: 78px;">
-                                    <div><iframe
-                                            src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LcjqBkUAAAAACTQ6yt47UwFSXQ5o-n9Q6D3Y_Zz&amp;co=aHR0cHM6Ly93d3cudGhlZ2lvaW51b2Nob2EuY29tLnZuOjQ0Mw..&amp;hl=vi&amp;v=v1561357937155&amp;size=normal&amp;cb=ehxuctk8hm9b"
-                                            width="304" height="78" role="presentation" name="a-1n6c7413hm7y"
-                                            frameborder="0" scrolling="no"
-                                            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe>
-                                    </div><textarea id="g-recaptcha-response" name="g-recaptcha-response"
-                                        class="g-recaptcha-response"
-                                        style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="btn-right">
-                                <button type="submit" class="readall">Gửi bình luận</button>
-                            </div>
-                        </div>
-                    </div>
-                </form> -->
             </div>
         </div>
     </section>

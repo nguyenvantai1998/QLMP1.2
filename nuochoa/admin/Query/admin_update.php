@@ -1,48 +1,49 @@
 <?php 
-    function update_sanpham($masp, $maloai, $tensp, $gia, $soluong, $mancc, $ngaysanxuat, $hansudung, $dungtich, $motaSP, $ngaynhaphang, $trangthai)
+function update_sanpham($masp, $maloai, $tensp, $gia, $soluong, $mancc, $ngaysanxuat, $hansudung, $dungtich, $motaSP, $ngaynhaphang, $trangthai)
+{
+    $sql = "UPDATE sp SET MaSP='$masp', Maloai='$maloai', Tensp='$tensp', Gia='$gia', Soluong='$soluong', MaNcc='$mancc', Ngaysanxuat='$ngaysanxuat', hansudung='$hansudung', dungtich='$dungtich', MotaSP='$motaSP', Ngaynhaphang='$ngaynhaphang', trangthai='$trangthai' WHERE sp.MaSP='$masp'";
+    include '../connect.php';
+
+    if($conn->query($sql))
     {
-        $sql = "UPDATE sp SET MaSP='$masp', Maloai='$maloai', Tensp='$tensp', Gia='$gia', Soluong='$soluong', MaNcc='$mancc', Ngaysanxuat='$ngaysanxuat', hansudung='$hansudung', dungtich='$dungtich', MotaSP='$motaSP', Ngaynhaphang='$ngaynhaphang', trangthai='$trangthai' WHERE sp.MaSP='$masp'";
+        echo 
+            "
+            <script type='text/javascript'>
+                setTimeout(function () { 
+                    Swal.fire({
+                        type: 'success',
+                        title: 'Cập nhật thành công !',
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+                }, 1);
+            </script>
+        ";
+    }
+}
+
+function update_admin($tentk, $matkhau, $quyen)
+{
+    try {
         include '../connect.php';
-
-        if($conn->query($sql))
-        {
-            echo 
-                "
-                <script type='text/javascript'>
-                    setTimeout(function () { 
-                        Swal.fire({
-                            type: 'success',
-                            title: 'Cập nhật thành công !',
-                            showConfirmButton: false,
-                            timer: 1000
-                        });
-                    }, 1);
-                </script>
-            ";
-        }
-    }
-    function update_admin($tentk, $matkhau, $quyen)
-    {
-        try {
-            include '../connect.php';
-            // include '.\..\..\select.php';
-            $table=query_select("select * from qttk where tentk='".$tentk."'");
-            $count=$table->rowCount();
-            if ($count==0)
-                {
-                    echo "<script>alert('Không tìm thấy dữ liệu cần cập nhật')</script>";
-                }
-            else {
-
-            $sql = "update qttk set matkhau='$matkhau',quyen='$quyen' where tentk='$tentk'";
-            $conn->exec($sql);
-            $conn=null;             
-            echo "<script>alert('đã cập nhật dữ liệu')</script>";
+        // include '.\..\..\select.php';
+        $table=query_select("select * from qttk where tentk='".$tentk."'");
+        $count=$table->rowCount();
+        if ($count==0)
+            {
+                echo "<script>alert('Không tìm thấy dữ liệu cần cập nhật')</script>";
             }
-        } catch (PDOException $e) {
-            echo "connection failed: " . $e->getMessage();
+        else {
+
+        $sql = "update qttk set matkhau='$matkhau',quyen='$quyen' where tentk='$tentk'";
+        $conn->exec($sql);
+        $conn=null;             
+        echo "<script>alert('đã cập nhật dữ liệu')</script>";
         }
+    } catch (PDOException $e) {
+        echo "connection failed: " . $e->getMessage();
     }
+}
     
 // DONE
 function update_password($tentk, $matkhau, $matkhaumoi)
@@ -193,27 +194,27 @@ function update_kmai($htkm,$makm,$tenkm)
 // }
 
 
-function update_sp($masp,$tensp,$gia,$maloai,$soluong,$mancc,$ngaynhaphang,$ngaysanxuat,$trangthai,$mota,$hansudung,$dungtich)
-{
-    try {
-        include '.\..\..\connect.php';
-        include '.\..\..\select.php';
-        $table=query_select("select * from sp where masp='".$masp."'");
-        $count=$table->rowCount();
-        if ($count==0)
-            {
-                echo "<script>alert('Không tìm thấy dữ liệu cần cập nhật')</script>";
-            }
-        else {
-        $sql = "update sp set tensp='$tensp',gia='$gia', maloai='$maloai',soluong='$soluong',mancc='$mancc',ngaynhaphang='$ngaynhaphang',ngaysanxuat='$ngaysanxuat',trangthai='$trangthai',mota='$mota',hansudung='$hansudung',dungtich='$dungtich' where masp='$masp'";
-        $conn->exec($sql);
-        $conn=null;             
-        echo "<script>alert('đã cập nhật dữ liệu')</script>";
-        }
-    } catch (PDOException $e) {
-        echo "connection failed: " . $e->getMessage();
-    }
-}
+// function update_sp($masp,$tensp,$gia,$maloai,$soluong,$mancc,$ngaynhaphang,$ngaysanxuat,$trangthai,$mota,$hansudung,$dungtich)
+// {
+//     try {
+//         include '.\..\..\connect.php';
+//         include '.\..\..\select.php';
+//         $table=query_select("select * from sp where masp='".$masp."'");
+//         $count=$table->rowCount();
+//         if ($count==0)
+//             {
+//                 echo "<script>alert('Không tìm thấy dữ liệu cần cập nhật')</script>";
+//             }
+//         else {
+//         $sql = "update sp set tensp='$tensp',gia='$gia', maloai='$maloai',soluong='$soluong',mancc='$mancc',ngaynhaphang='$ngaynhaphang',ngaysanxuat='$ngaysanxuat',trangthai='$trangthai',mota='$mota',hansudung='$hansudung',dungtich='$dungtich' where masp='$masp'";
+//         $conn->exec($sql);
+//         $conn=null;             
+//         echo "<script>alert('đã cập nhật dữ liệu')</script>";
+//         }
+//     } catch (PDOException $e) {
+//         echo "connection failed: " . $e->getMessage();
+//     }
+// }
 // DONE
 function update_tintuc($matin,$noidung,$tieude)
 {

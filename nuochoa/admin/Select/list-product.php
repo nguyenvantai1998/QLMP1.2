@@ -51,7 +51,6 @@
 
 <!-- delete -->
 
-
 <!-- list -->
 <div class="row">
     <table class="table table-hover text-center">
@@ -62,6 +61,7 @@
                 <th>Giá</th>
                 <th>Số Lượng</th>
                 <th>Trạng Thái</th>
+                <th>Hình ảnh</th>
                 <th>Chi Tiết</th>
                 <th>
                     <button type="button" name="delete_all" id="delete_all" class="btn btn-danger">
@@ -86,27 +86,24 @@
                 <td><?php echo $row['Gia'] ?></td>
                 <td><?php echo $row['Soluong'] ?></td>
                 <td><?php echo $row['trangthai'] ?></td>
-                <!-- <td style="width:20%;">
-                    <div class="row"> -->
+                <td style="width:20%;">
+                    <div class="row">
                         <?php 
-                            // $table = query_select("SELECT * FROM sp, video WHERE sp.MaSP = video.MaSP AND sp.MaSP = '$masp'");
-                            // $count = $table->rowCount();
-                            // if($count > 0)
-                            // {
-                            //     foreach ($table as $row) {
+                            $table = query_select("SELECT * FROM video WHERE video.MaSP = '$masp' LIMIT 4 ");
+                            $count = $table->rowCount();
+                            if($count > 0)
+                            {
+                                foreach ($table as $row) {
                         ?>
-                        <!-- <div class="col-md-3" style="margin-bottom:5px;">
+                        <div class="col-md-3" style="margin-bottom:5px;">
                             <img class="img-thumbnail" src="./../<?php echo $row['URLHinh'] ?>" alt="">
-                        </div> -->
+                        </div>
                         <?php
-                            //     }
-                            // }
+                                }
+                            }
                         ?>
-                        <!-- <div class="col-md-3">
-                            <a href="?page=upload&&masp=<?php echo $masp ?>"><button class="btn"><i class="fas fa-plus-square"></i></button></a>
-                        </div> -->
-                    <!-- </div>
-                </td> -->
+                    </div>
+                </td>
                 <td>
                     <a id="example" href="?page=detail-product&&masp=<?php echo $row['MaSP']; ?>">
                         <button type="button" class="btn btn-info">

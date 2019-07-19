@@ -1,5 +1,6 @@
 <?php
-   if (isset($_POST["submit"])) {
+   if (isset($_POST["submit"]) && $_POST['randcheck']==$_SESSION['rand'])
+    {
        if ($_POST['tenTin'] != ""&& $_POST['noidungTin'] != "") {
            try {
             $tieude = $_POST['tenTin'];
@@ -22,6 +23,13 @@
    ?>
 <!-- FORM -->
 <form id="" method="post">
+   <!-- deactive reload -->
+   <?php
+      $rand=rand();
+      $_SESSION['rand']=$rand;
+   ?>
+   <input type="hidden" value="<?php echo $rand; ?>" name="randcheck" />
+
    <!-- TIME START AND END DISCOUNT -->
    <div class="form-group row">
       <label for="inputEmail3" class="col-sm-2 col-form-label">Tin tức<span
@@ -52,7 +60,7 @@
    <!-- BUTTON SEND -->
    <div class="form-group row text-center">
       <div class="col-sm-12 col-sm-custom">
-         <button type="submit" name="submit" class="btn btn-warning">Thêm Loại</button>
+         <button type="submit" name="submit" class="btn btn-warning">Thêm Tin</button>
       </div>
    </div>
 </form>

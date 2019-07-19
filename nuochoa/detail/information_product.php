@@ -1,6 +1,6 @@
 <div class="content">
     <?php
-        $table = query_select("SELECT * FROM tintuc");
+        $table = query_select("SELECT * FROM tintuc LIMIT 3 ");
         $count = $table->rowCount();
         if ($count > 0) {
             foreach ($table as $row3) {

@@ -228,13 +228,7 @@ function insert_tintuc($noidung,$tieude)
 {
     try {
         include '../connect.php';
-        $table=query_select("select * from tintuc where matin='".$matin."'");
-        $count=$table->rowCount();
-        if ($count>0)
-            {
-               echo "<script>alert('Tin đã tồn tại')</script>";
-            }
-        else {
+       
         $sql = "Insert into tintuc (noidung,tieude) values ('$noidung','$tieude')";
         $conn->exec($sql);
         $conn=null;
@@ -246,7 +240,7 @@ function insert_tintuc($noidung,$tieude)
                     timer: 1500
                   });";
                 echo '}, 100);</script>';
-        }
+        
     } catch (PDOException $e) {
         echo "connection failed: " . $e->getMessage();
     }

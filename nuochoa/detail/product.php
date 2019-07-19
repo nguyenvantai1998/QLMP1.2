@@ -1,8 +1,9 @@
 
+<!-- mã sản phẩm -->
 <?php $masp = $_GET['masp']; ?>
 
 <?php
-    $table = query_select("SELECT * FROM sp, nhacungcap WHERE sp.MaNcc = nhacungcap.MaNCC AND sp.MaSP= '$masp'");
+    $table = query_select("SELECT * FROM sp, nhacungcap, ctkm, kmai WHERE sp.MaNcc = nhacungcap.MaNCC  AND sp.MaSP = ctkm.MaSP AND ctkm.MaKm = kmai.MaKm AND sp.MaSP= '$masp'");
     $count = $table->rowCount();
     if ($count > 0) {
         foreach ($table as $row) {
@@ -18,7 +19,8 @@
             <div class="left-img">
                 <div class="list-img-product">
                     <?php
-                        $table = query_select("SELECT * FROM sp, video WHERE sp.MaSP = video.MaSP AND sp.MaSP= '$masp' limit 0,5 ");
+                        $table = query_select("SELECT * FROM video WHERE video.MaSP = '$masp' limit 0,5 ");
+                        
                         $count = $table->rowCount();
                         if ($count > 0) {
                             foreach ($table as $row1) {
@@ -32,7 +34,7 @@
 
                 <div class="list-button-img">
                     <?php
-                        $table = query_select("SELECT * FROM sp, video WHERE sp.MaSP = video.MaSP AND sp.MaSP= '$masp' limit 0,5 ");
+                        $table = query_select("SELECT * FROM video WHERE video.MaSP = '$masp' limit 0,5 ");
                         $count = $table->rowCount();
                         if ($count > 0) {
                             foreach ($table as $row2) {
@@ -54,13 +56,37 @@
                         <li><span>Ngày nhập hàng</span>: <span><?php echo $row['Ngaynhaphang']; ?></span></li>
                         <li><span>Hạng sử dụng</span>: <span><?php echo $row['hansudung']; ?> ngày</span></li>
                         <li><span>Mã nhà cung cấp</span>: <span><?php echo $row['MaNcc']; ?></span></li>
-                        <li><span>Giá</span>: <span><?php echo $row['Gia']; ?> VNĐ</span></li>
+                        <li><span>Giá</span>: <span><?php echo number_format( $row['Gia'] ); ?> VNĐ</span></li>
+                        <li><span>Giá gold</span>: <span>
+                        <?php
+                            if($row['Tilegiamgia'] !=0)
+                            {
+                                echo number_format( ($row['Gia'] * $row['Tilegiamgia'])/100 ) ." VNĐ";
+                            }
+                            else
+                            {
+                                echo "Không";
+                            }
+                        ?>
+                        </span></li>
+                        <li><span>Giá member</span>: <span>
+                        <?php
+                            if($row['member'] !=0)
+                            {
+                                echo number_format( ($row['Gia'] * $row['member'])/100 ) ." VNĐ";
+                            }
+                            else
+                            {
+                                echo "Không";
+                            }
+                        ?>
+                        </span></li>
                     </ul>
                 </div>
 
                 <div class="row-2">
                     <h4 class="title-sub">Mô tả</h4>
-                    <p><?php echo $row['Mota']; ?></p>
+                    <p><?php echo $row['MotaSP'] ?></p>
                 </div>
             </div>
         </div>

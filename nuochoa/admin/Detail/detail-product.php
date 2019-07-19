@@ -6,7 +6,7 @@
 
 <!-- update product -->
 <?php 
-    if(isset($_POST["submit-update"]))
+    if(isset($_POST["submit-update"]) && $_POST['randcheck_update']==$_SESSION['rand_update'] )
     {
         try{
             $maloai = $_POST['slMaloai'];
@@ -98,6 +98,10 @@
                         <!-- INFO PRODUCT -->
                         <div class="form-group row">
                             <div class="col-sm-12">
+                                <!-- deactive reload -->
+                                <?php $rand=rand(); $_SESSION['rand_update']=$rand; ?>
+                                <input type="hidden" value="<?php echo $rand; ?>" name="randcheck_update" />
+
                                 <!-- mã sản phẩm -->
                                 <label for="inputState">Mã sản phẩm:</label>
                                 <input 
@@ -300,8 +304,8 @@
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div style="height:24px;width:100%;">
                         <?php
-                            if(isset($_POST['submit'])){
-                                
+                            if(isset($_POST['submit']) && $_POST['randcheck_img']==$_SESSION['rand_img'] )
+                            {
                                 // File upload configuration
                                 $targetDir = "./../picture/";
                                 $allowTypes = array(
@@ -312,44 +316,68 @@
                                 );
                                 
                                 $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = '';
-                                if(!empty(array_filter($_FILES['files']['name']))){
-                                    foreach($_FILES['files']['name'] as $key=>$val){
+                                if(!empty(array_filter($_FILES['files']['name'])))
+                                {
+                                    foreach($_FILES['files']['name'] as $key=>$val)
+                                    {
                                         // File upload path
                                         $fileName = basename($_FILES['files']['name'][$key]);
                                         $targetFilePath = $targetDir . $fileName;
                                         
                                         // Check whether file type is valid
                                         $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-                                        if(in_array($fileType, $allowTypes)){
+                                        if(in_array($fileType, $allowTypes))
+                                        {
                                             // Upload file to server
-                                            if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){
+                                            if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath))
+                                            {
                                                 // Image db insert sql
                                                 $insertValuesSQL .= "('','./picture/".$fileName."', '".$masp."','1','1', NOW()),";
-                                            }else{
+                                            }
+                                            else
+                                            {
                                                 $errorUpload .= $_FILES['files']['name'][$key].', ';
                                             }
-                                        }else{
+                                        }
+                                        else
+                                        {
                                             $errorUploadType .= $_FILES['files']['name'][$key].', ';
                                         }
                                     }
                                     
-                                    if(!empty($insertValuesSQL)){
+                                    if(!empty($insertValuesSQL))
+                                    {
                                         $insertValuesSQL = trim($insertValuesSQL,',');
                                         // Insert image file name into database
                                         $insert = $conn->query("INSERT INTO video (URLVideo, URLHinh, MaSP, MaTin, MaKH, update_on) VALUES  $insertValuesSQL");
-                                        if($insert){
+                                        if($insert)
+                                        {
                                             $errorUpload = !empty($errorUpload)?'Upload Error: '.$errorUpload:'';
                                             $errorUploadType = !empty($errorUploadType)?'File Type Error: '.$errorUploadType:'';
                                             $errorMsg = !empty($errorUpload)?'<br/>'.$errorUpload.'<br/>'.$errorUploadType:'<br/>'.$errorUploadType;
-                                            $statusMsg = "Files are uploaded successfully.".$errorMsg;
-                                        }else{
+                                            $statusMsg = "
+                                                <script type='text/javascript'>
+                                                    setTimeout(function () { 
+                                                        Swal.fire({
+                                                            type: 'success',
+                                                            title: 'Cập nhật thành công !',
+                                                            showConfirmButton: false,
+                                                            timer: 1500
+                                                        });
+                                                    }, 1);
+                                                </script>
+                                            ".$errorMsg;
+                                        }
+                                        else
+                                        {
                                             $statusMsg = "Sorry, there was an error uploading your file.";
                                         }
                                     }
-                                }else{
+                                }
+                                else
+                                {
                                     $statusMsg = 'Please select a file to upload.';
                                 }
-                                
                                 // Display status message
                                 echo $statusMsg;
                             }
@@ -358,6 +386,9 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row">
+                                <!-- deactive reload -->
+                                <?php $rand=rand(); $_SESSION['rand_img']=$rand; ?>
+                                <input type="hidden" value="<?php echo $rand; ?>" name="randcheck_img" />
                                 <input type="file" name="files[]" multiple >
                             </div>
                         </div>
@@ -383,17 +414,11 @@
                 <div class="col-md-3 col-sm-3 box-gallery" style="margin-bottom:15px;">
                     <img class="img-thumbnail" src="./../<?php echo $row['URLHinh'] ?>" style="height:120px;width:100%;margin-bottom:5px;">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <button 
                                 class="col-md-12 btn btn-danger btn-sm del-img"
                                 id="<?php echo $row['MaMulti'] ?>"
-                            ><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                        <div class="col-md-6">
-                            <button 
-                                class="col-md-12 btn btn-info btn-sm"
-                                data-toggle="modal" data-target="#upIMG"
-                            ><i class="fas fa-sync"></i></button>
+                            ><i class="fas fa-trash-alt"></i> Xóa</button>
                         </div>
                     </div>
                 </div>
@@ -405,29 +430,4 @@
         </div>
     </div>
 
-</div>
-
-<!-- The Modal detail project -->
-<div class="modal" id="upIMG">
-    <div class="modal-dialog" style="max-width:500px">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Detail project</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body" *ngIf="detailList">
-                ADASS
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-
-        </div>
-    </div>
 </div>

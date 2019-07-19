@@ -7,7 +7,6 @@
     <div class="col-12">
         <h4>
             <i class="fas fa-images"></i> Thêm ảnh sản phẩm
-            <small class="float-right"><a href="indexAdmin.php"><i class="fas fa-undo-alt"></i> Trở lại</a></small>
         </h4>
     </div>
 </div><br>
@@ -19,7 +18,7 @@
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div style="height:24px;width:100%;">
                         <?php
-                            if(isset($_POST['submit'])){
+                            if(isset($_POST['submit'])  && $_POST['randcheck_add_img']==$_SESSION['rand_add_img'] ){
                                 
                                 // File upload configuration
                                 $targetDir = "./../picture/";
@@ -60,7 +59,19 @@
                                             $errorUpload = !empty($errorUpload)?'Upload Error: '.$errorUpload:'';
                                             $errorUploadType = !empty($errorUploadType)?'File Type Error: '.$errorUploadType:'';
                                             $errorMsg = !empty($errorUpload)?'<br/>'.$errorUpload.'<br/>'.$errorUploadType:'<br/>'.$errorUploadType;
-                                            $statusMsg = "Files are uploaded successfully.".$errorMsg;
+                                            // $statusMsg = "Files are uploaded successfully.".$errorMsg;
+                                            $statusMsg = "
+                                                <script type='text/javascript'>
+                                                    setTimeout(function () { 
+                                                        Swal.fire({
+                                                            type: 'success',
+                                                            title: 'Thêm ảnh thành công !',
+                                                            showConfirmButton: false,
+                                                            timer: 1500
+                                                        });
+                                                    }, 1);
+                                                </script>
+                                            ".$errorMsg;
                                         }else{
                                             $statusMsg = "Sorry, there was an error uploading your file.";
                                         }
@@ -77,6 +88,10 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row">
+                                <!-- deactive reload -->
+                                <?php $rand=rand(); $_SESSION['rand_add_img']=$rand; ?>
+                                <input type="hidden" value="<?php echo $rand; ?>" name="randcheck_add_img" />
+
                                 <input type="file" name="files[]" multiple >
                             </div>
                         </div>
@@ -104,11 +119,25 @@
                 </div>
                 <?php
                         }
+                    ?>
+                <div class="col-md-2 row" style="margin-bottom:15px;font-size:20px;display: flex;align-items:center;">
+                    <div class="col-md-6">
+                        <a href="?page=them_san_pham"><button class="btn btn-primary" >Thêm tiếp</button></a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="indexAdmin.php"><button class="btn btn-secondary">Trở lại</button></a>
+                    </div>
+                </div> 
+                    <?php
                     }
+
+                    else
+                    {
+                        echo "<div class='container'><h5 class='text-center text-warning'>Sản phẩm chưa có ảnh. Vui lòng tải ảnh cho sản phẩm !</h5></div>";
+                    }
+
                 ?>
-                <div class="col-md-2" style="margin-bottom:15px;font-size:30px;display: flex;align-items:center;justify-content: center;">
-                    <a href="indexAdmin.php"><i class="fas fa-undo-alt"></i> Trở lại</a>
-                </div>
+                
             </div>  
         </div>
         <!-- /.card -->

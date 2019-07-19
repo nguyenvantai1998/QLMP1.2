@@ -49,7 +49,7 @@ foreach($query as $row){
                         timer: 1500
                       });";
             
-                    echo '}, 1000);</script>';
+                    echo '}, 1);</script>';
     }
 }
                     
