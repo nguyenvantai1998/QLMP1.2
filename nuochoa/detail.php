@@ -28,7 +28,7 @@
             <!-- thông tin sản phẩm -->
             <div class="col-left information">
                 <div class="title">
-                    <h3>THÔNG TIN SẢN PHẨM</h3>
+                    <h3>THÔNG TIN LIÊN QUAN</h3>
                 </div>
                 <!-- thông tin sản phẩm -->
                 <?php include("detail/information_product.php"); ?>
