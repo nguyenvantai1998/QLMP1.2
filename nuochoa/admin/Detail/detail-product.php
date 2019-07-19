@@ -1,6 +1,9 @@
 <!-- mã sản phẩm -->
 <?php $masp = $_GET['masp']; ?>
 
+<!-- kết nối database -->
+<?php include("./../connect.php"); ?>
+
 <!-- update product -->
 <?php 
     if(isset($_POST["submit-update"]))
@@ -293,34 +296,125 @@
     <!-- ảnh sản phẩm -->
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">
-                    Ảnh sản phẩm
-                </h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <dl class="dl-horizontal">
-                    <div class="card-footer bg-white">
-                        <div class="row">
-                            <?php 
-                                $table = query_select("SELECT * FROM video WHERE video.MaSP = '$masp'");
-                                $count = $table->rowCount();
-                                if($count > 0)
-                                {
-                                    foreach ($table as $row_img) {
-                            ?>
-                            <div class="col-md-4" style="margin-bottom:10px;">
-                                <img class="img-thumbnail" src="./../<?php echo $row_img['URLHinh'] ?>" style="height:160px;">
-                            </div>
-                                <?php
+            <div class="card-header" style="padding-bottom: 25px;">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <div style="height:24px;width:100%;">
+                        <?php
+                            if(isset($_POST['submit'])){
+                                
+                                // File upload configuration
+                                $targetDir = "./../picture/";
+                                $allowTypes = array(
+                                    'Jpg','JPj','JPG','jpg',
+                                    'Png','PNg','PNG','png',
+                                    'Jpeg','JPeg','JPEg','JPEG','jpeg',
+                                    'Git','GIt','GIT','gif'
+                                );
+                                
+                                $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = '';
+                                if(!empty(array_filter($_FILES['files']['name']))){
+                                    foreach($_FILES['files']['name'] as $key=>$val){
+                                        // File upload path
+                                        $fileName = basename($_FILES['files']['name'][$key]);
+                                        $targetFilePath = $targetDir . $fileName;
+                                        
+                                        // Check whether file type is valid
+                                        $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+                                        if(in_array($fileType, $allowTypes)){
+                                            // Upload file to server
+                                            if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){
+                                                // Image db insert sql
+                                                $insertValuesSQL .= "('','./picture/".$fileName."', '".$masp."','1','1', NOW()),";
+                                            }else{
+                                                $errorUpload .= $_FILES['files']['name'][$key].', ';
+                                            }
+                                        }else{
+                                            $errorUploadType .= $_FILES['files']['name'][$key].', ';
+                                        }
                                     }
+                                    
+                                    if(!empty($insertValuesSQL)){
+                                        $insertValuesSQL = trim($insertValuesSQL,',');
+                                        // Insert image file name into database
+                                        $insert = $conn->query("INSERT INTO video (URLVideo, URLHinh, MaSP, MaTin, MaKH, update_on) VALUES  $insertValuesSQL");
+                                        if($insert){
+                                            $errorUpload = !empty($errorUpload)?'Upload Error: '.$errorUpload:'';
+                                            $errorUploadType = !empty($errorUploadType)?'File Type Error: '.$errorUploadType:'';
+                                            $errorMsg = !empty($errorUpload)?'<br/>'.$errorUpload.'<br/>'.$errorUploadType:'<br/>'.$errorUploadType;
+                                            $statusMsg = "Files are uploaded successfully.".$errorMsg;
+                                        }else{
+                                            $statusMsg = "Sorry, there was an error uploading your file.";
+                                        }
+                                    }
+                                }else{
+                                    $statusMsg = 'Please select a file to upload.';
                                 }
-                            ?>
+                                
+                                // Display status message
+                                echo $statusMsg;
+                            }
+                        ?>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <input type="file" name="files[]" multiple >
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <button 
+                                name="submit" 
+                                type="submit" 
+                                class="btn btn-info"
+                            >Upload</button>
+                            </div>
                         </div>
                     </div>
-                </dl>
+                </form>
             </div>
+            <div class="row">
+                <?php 
+                    $table = query_select("SELECT * FROM video WHERE video.MaSP = '$masp'");
+                    $count = $table->rowCount();
+                    if($count > 0)
+                    {
+                        foreach ($table as $row) {
+                ?>
+                <div class="col-md-3 col-sm-3 box-gallery" style="margin-bottom:15px;">
+                    <img class="img-thumbnail" src="./../<?php echo $row['URLHinh'] ?>" style="height:120px;width:100%;margin-bottom:5px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button 
+                                class="col-md-12 btn btn-danger btn-sm del-img"
+                                id="<?php echo $row['MaMulti'] ?>"
+                            ><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="col-md-12 btn btn-info btn-sm"><i class="fas fa-sync"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <?php
+                        }
+                    }
+                ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>  
         </div>
     </div>
 

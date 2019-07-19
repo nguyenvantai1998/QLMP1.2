@@ -38,50 +38,7 @@
       color: #FFFFFF;
     }
   </style>
-  <script>
-    $(document).ready(function(){
-
-      $('.delete_checkbox').click(function(){
-        if($(this).is(':checked'))
-        {
-          $(this).closest('tr').addClass('removeRow');
-        }
-        else
-        {
-          $(this).closest('tr').removeClass('removeRow');
-        }
-      })
-
-      $('#delete_all').click(function(){
-        var checkbox = $('.delete_checkbox:checked');
-        if(checkbox.length > 0)
-        {
-          var checkbox_value = [];
-          $(checkbox).each(function(){
-            checkbox_value.push($(this).val());
-          });
-
-          $.ajax({
-            url: "Delete/del_sanpham.php",
-            method: "POST",
-            data:{checkbox_value:checkbox_value},
-            success: function()
-            {
-              $('.removeRow').fadeOut(1000);
-            }
-          });
-        }
-        else
-        {
-          alert("Select atleast one record");
-        }
-
-
-      })
-
-    })
-  </script>
-
+  <script src="./../assets/js/custome-admin.js"></script>
 </body>
 
 </html>
