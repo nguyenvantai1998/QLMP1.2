@@ -1,0 +1,75 @@
+@import "helper/custom.scss";
+@import "./helper/font.scss";
+// header
+@import "layout/header/header";
+
+// main
+#main{
+    background: $white;
+    margin-top: 120px;
+
+    // main 1
+    .main-1{
+        @include container(85%);
+        @include container-fb;
+
+        // banner advertisement
+        .bannerAdvertisement{
+            @include col-auto(20%);
+
+            @import "./layout/main/advertisement";
+        }
+
+        // product
+        .boxProduct{
+            @include col-auto(80%);
+            padding: 25px;
+
+            @import "./layout/main/product-1";
+        }
+    }
+
+    // main 2
+    .main-2{
+        @include container(85%);
+
+        @import "./layout/main/product-2"; 
+    }
+}
+// main detail
+#mainDetail{
+    margin: 25px 0;
+
+    @import "./layout/detail/detailProduct";
+    @import "./layout/detail/information";
+    @import "./layout/detail/trademark";
+}
+// footer
+@import "layout/footer/footer";
+// responsive
+@include res(1199px){
+    #main{
+        .main-1{
+            max-width: 90%;
+
+            .bannerAdvertisement{
+                @include col-100;
+            }
+            .boxProduct{
+                @include col-100;
+                margin-top: 100px;
+                padding: 0;
+            }
+        }
+        .main-2{
+            max-width: 90%;
+        }
+    }
+}
+@include res(768px){
+    #main{
+        .main-1{
+            max-width: 95%;
+        }
+    }
+}

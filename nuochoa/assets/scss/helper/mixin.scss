@@ -1,0 +1,141 @@
+@import 'variable.scss';
+
+@mixin set-font($name, $link){
+    @font-face{
+        font-family: $name;
+        src: url($link) format("opentype"); 
+    }
+};
+
+@mixin set-f-s-cl($fam, $size, $cl){
+    font-size: $size;
+    color: $cl;
+    font-family: $fam;
+};
+
+@mixin flex($dir){
+    display: flex;
+    flex-direction: $dir;
+    @content
+};
+
+@mixin res($width) {
+    @media screen and(max-width: $width) {
+        @content;
+    }
+}
+
+@mixin res2($max-w, $min-w) {
+    @media only screen and (max-width:$max-w) and (min-width:$min-w){
+        @content;
+    } 
+}
+
+// container , row, container flexbox
+@mixin container ($mw){
+    max-width: $mw;
+    margin: 0 auto;
+}
+@mixin set-s-cl($size, $cl){
+    font-size: $size;
+    color: $cl;
+};
+@mixin flex($dir){
+    display: flex;
+    display: -ms-flexbox;
+    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-direction: $dir;
+}
+@mixin container-fb {
+    display: flex;
+    display: -ms-flexbox;
+    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+}
+// reset button input
+@mixin rs-ip-bt(){
+    border: none;
+    outline: none;
+};
+//col playout
+@mixin col-auto($size) {
+    position: relative;
+    flex: 0 0 $size;
+    -ms-flex: 0 0 $size;
+    max-width: 100%;
+}
+@mixin img-res {
+    max-width: 100%;
+    height: auto;
+}
+@mixin col-16 {//3
+    position: relative;
+    flex: 0 0 16.666667%;
+    -ms-flex: 0 0 16.666667%;
+    max-width: 100%;
+}
+@mixin col-25 {//3
+    position: relative;
+    flex: 0 0 25%;
+    -ms-flex: 0 0 25%;
+    max-width: 100%;
+}
+@mixin col-75 {//9
+    position: relative;
+    flex: 0 0 75%;
+    -ms-flex: 0 0 75%;
+    max-width: 100%;
+}
+@mixin col-33 {//4
+    position: relative;
+    flex: 0 0 33.333333%;
+    -ms-flex: 0 0 33.333333%;
+    max-width: 100%;
+}
+@mixin col-66 {//8
+    position: relative;
+    flex: 0 0 66.666667%;
+    -ms-flex: 0 0 66.666667%;
+    max-width: 100%;
+}
+@mixin col-50 {//6
+    position: relative;
+    flex: 0 0 50%;
+    -ms-flex: 0 0 50%;
+    max-width: 100%;
+}
+@mixin col-100 {//12
+    position: relative;
+    flex: 0 0 100%;
+    -ms-flex: 0 0 100%;
+    max-width: 100%;
+}
+
+// page
+@mixin ft-content {
+    font-family: $ft-OpenSans;
+    font-size: 14px;
+    line-height: 1.5em;
+    color: $cl-2;
+}
+@mixin ft-title {
+    font-size: 20px;
+    margin: 0 -15px 30px;
+    color: $white;
+    background-color: $cl-2;
+    line-height: 50px;
+    text-align: center;
+    font-family: 'UTM Avo';
+    font-family: $ft-OpenSans;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+// footer
+@mixin align-flex($j-cont,$a-cont){
+    display: flex;
+    justify-content: $j-cont;
+    align-items: $a-cont;
+    @content;
+}
+

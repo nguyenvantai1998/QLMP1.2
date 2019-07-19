@@ -1,0 +1,242 @@
+.productInformation{
+    .pr-in-container{
+        @include container(80%);
+        @include container-fb;
+
+        .information{
+            @include col-50;
+            padding: 0 15px;
+
+            .title{
+                h3{
+                    @include ft-title;
+                }
+            }
+            .content{
+                text-align: justify;
+
+                p{
+                    @include ft-content;
+                    line-height: 25px;
+                    margin-bottom: 20px;
+
+                    img{
+                        @include img-res;
+                    }
+                }
+            }
+        }
+
+        .opinion{
+            @include col-50;
+            padding: 0 15px;
+
+            &::before{
+                margin-left: -15px;
+                content: "";
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 1px;
+                background-color: #ececec;
+            }
+            .title{
+                h3{
+                    @include ft-title;
+                }
+            }
+
+            .content-review{
+               .list-item{
+                    @include ft-content;
+
+                   .item{
+                        margin-bottom: 29px;
+
+                        .name{
+                            font-weight: 700;
+                            display: block;
+                            margin-bottom: 10px;
+                            font-size: 16px;
+                        }
+                        .meta{
+                            margin-bottom: 10px;
+
+                            .rating{
+                                display: inline-block;
+                                width: 75px;
+                                height: 15px;
+                                background: url($bgURL+"star.svg") repeat-x left 1px;
+                                position: relative;
+                                top: 3px;
+                            }
+                            .date{
+                                margin-left: 20px;
+                                font-style: italic;
+                            }
+                        }
+                        .desc{
+                            text-align: justify;
+                        }
+                        .reply{
+                            background-color: $cl-3;
+                            padding: 15px;
+                            margin-top: 20px;
+                            position: relative;
+
+                            .name{
+                                font-weight: 700;
+                                display: block;
+                                margin-bottom: 10px;
+                                font-size: 16px;
+                                color: $cl-primary;
+                            }
+                            p{
+                                line-height: 25px;
+                            }
+                            &::before {
+                                position: absolute;
+                                left: 42px;
+                                top: -15px;
+                                content: "";
+                                width: 0;
+                                height: 0;
+                                border-left: 15px solid transparent;
+                                border-right: 15px solid transparent;
+                                border-bottom: 15px solid $cl-3;
+                            }
+                        }
+                   }
+               } 
+            }
+
+            .form-review{
+                padding: 0 15px 15px;
+                background-color: #f9f9f9;
+
+                .title{
+                    @include ft-title;
+                }
+                .inner{
+                    @include ft-content;
+                    line-height: 25px;
+                    margin-bottom: 20px;
+
+                    .rating {
+                        display: inline-block;
+                        width: 75px;
+                        height: 15px;
+                        background: url($bgURL + "star.svg") repeat-x left 1px;
+                        position: relative;
+                        top: 3px;
+                    }
+                }
+                .row-1{
+                    .comment-content{
+                        width: 94%;
+                        height: 100px;
+                        padding: 15px;
+                        border: 1px solid #b3b3b3;
+                        outline: none;
+                        border-radius: 6px;
+                        margin-bottom: 10px;
+                    }
+                }
+                .row-2{
+                    .comment-name,
+                    .comment-email{
+                        height: 37px;
+                        border: 1px solid #b3b3b3;
+                        outline: none;
+                        padding: 0 15px;
+                        border-radius: 6px;
+                        margin-bottom: 10px;
+                        width: 94%;
+                    }
+                }
+                .row-3{
+                    @include container-fb;
+
+                    .g-recaptcha{
+                        @include col-auto(70%);
+                    }
+                    .btn-right{
+                        @include col-auto(30%);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        .readall{
+                            transition: all .2s linear;
+                            color: $white;
+                            background-color: $cl-primary;
+                            cursor: pointer;
+                            font-size: 16px;
+                            font-weight: 200;
+                            display: inline-block;
+                            padding: 8px 15px;
+                            border-radius: 10px;
+                            outline: none;
+                            border: 0;
+                            font-family: $ft-OpenSans;
+
+                            &:hover{
+                                background: $cl-2;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+// responsive
+@include res(1199px){
+    .productInformation{
+        .pr-in-container{
+            @include container(90%);
+        }
+    }
+}
+
+@include res(991px){
+    .productInformation{
+        .pr-in-container{
+            .col-left{
+                @include col-100;
+            }
+            .col-right{
+                @include col-100;
+            }
+            .opinion::before {
+                display: none;
+            }
+        }
+    }
+}
+
+@include res(600px){
+    .productInformation {
+        .pr-in-container {
+            .opinion {
+                .form-review {
+                    .row-1 {
+                        .comment-content{
+                            width: 90%;
+                        }
+                    }
+                    .row-2 .comment-name,
+                    .row-2 .comment-email{
+                        width: 90%;
+                    }
+                    .row-3 .btn-right{
+                        @include col-100;
+                        margin-top: 15px;
+                    }
+                }
+            }
+        }
+    }
+}
