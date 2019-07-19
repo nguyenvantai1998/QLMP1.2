@@ -208,18 +208,11 @@ function insert_sp($masp, $maloai, $tensp, $gia, $soluong, $mancc, $ngaysanxuat,
 {
     try {
         include '../connect.php';
-        $table=query_select("select * from sp where MaSP='".$masp."'");
-        $count=$table->rowCount();
-        if ($count>0)
+        $table = query_select("SELECT * FROM sp WHERE sp.MaSP='".$masp."'");
+        $count = $table->rowCount();
+        if ($count > 0)
             {
-                echo '<script type="text/javascript">';
-                echo "setTimeout(function () { Swal.fire({
-                    type: 'error',
-                    title: 'Sản phẩm đã tồn tại !',
-                    showConfirmButton: false,
-                    timer: 1500
-                  });";
-                echo '}, 100);</script>';
+                echo "<script>alert('Mã sản phẩm này đã tồn tại')</script>";
             }
         else {
         $sql = "INSERT INTO `sp`(`MaSP`, `Maloai`, `Tensp`, `Gia`, `Soluong`, `MaNcc`, `Ngaysanxuat`, `hansudung`, `dungtich`, `MotaSP`, `Ngaynhaphang`, `trangthai`) VALUES ('$masp', '$maloai', '$tensp', '$gia', '$soluong', '$mancc', '$ngaysanxuat', '$hansudung', '$dungtich', '$motaSP', '$ngaynhaphang', '$trangthai')";

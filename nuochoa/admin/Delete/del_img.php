@@ -6,6 +6,5 @@
     $query = "DELETE FROM video WHERE video.MaMulti ='$id'";
     $statement = $conn->prepare($query);
     $statement->execute();
-    
 
 ?>

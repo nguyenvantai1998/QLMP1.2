@@ -4,17 +4,20 @@
 	}
 </script>
 <?php
-if($_SESSION['DeleteCheck']){
-    echo '<script type="text/javascript">';
-    echo "setTimeout(function () { Swal.fire({
-        type: 'success',
-        title: 'Đã xóa tin tức!',
-        showConfirmButton: false,
-        timer: 1500
-         });";
-    echo '}, 1000);</script>';
-    $_SESSION['DeleteCheck'] = false;
-}
+    if(isset($_SESSION['DeleteCheck']))
+    {
+        if($_SESSION['DeleteCheck']){
+            echo '<script type="text/javascript">';
+            echo "setTimeout(function () { Swal.fire({
+                type: 'success',
+                title: 'Đã xóa tin tức!',
+                showConfirmButton: false,
+                timer: 1500
+                });";
+            echo '}, 1000);</script>';
+            $_SESSION['DeleteCheck'] = false;
+        }
+    }
 ?>
 <!-- Small boxes (Stat box) -->
 <div class="row">

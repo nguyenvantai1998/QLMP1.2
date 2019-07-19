@@ -390,7 +390,10 @@
                             ><i class="fas fa-trash-alt"></i></button>
                         </div>
                         <div class="col-md-6">
-                            <button class="col-md-12 btn btn-info btn-sm"><i class="fas fa-sync"></i></button>
+                            <button 
+                                class="col-md-12 btn btn-info btn-sm"
+                                data-toggle="modal" data-target="#upIMG"
+                            ><i class="fas fa-sync"></i></button>
                         </div>
                     </div>
                 </div>
@@ -398,24 +401,33 @@
                         }
                     }
                 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </div>  
         </div>
     </div>
 
+</div>
+
+<!-- The Modal detail project -->
+<div class="modal" id="upIMG">
+    <div class="modal-dialog" style="max-width:500px">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Detail project</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" *ngIf="detailList">
+                ADASS
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
 </div>

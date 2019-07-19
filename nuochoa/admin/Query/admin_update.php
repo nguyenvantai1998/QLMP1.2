@@ -22,27 +22,28 @@
         }
     }
     function update_admin($tentk, $matkhau, $quyen)
-{
-    try {
-        include '../connect.php';
-        // include '.\..\..\select.php';
-        $table=query_select("select * from qttk where tentk='".$tentk."'");
-        $count=$table->rowCount();
-        if ($count==0)
-            {
-                echo "<script>alert('Không tìm thấy dữ liệu cần cập nhật')</script>";
-            }
-        else {
+    {
+        try {
+            include '../connect.php';
+            // include '.\..\..\select.php';
+            $table=query_select("select * from qttk where tentk='".$tentk."'");
+            $count=$table->rowCount();
+            if ($count==0)
+                {
+                    echo "<script>alert('Không tìm thấy dữ liệu cần cập nhật')</script>";
+                }
+            else {
 
-        $sql = "update qttk set matkhau='$matkhau',quyen='$quyen' where tentk='$tentk'";
-        $conn->exec($sql);
-        $conn=null;             
-        echo "<script>alert('đã cập nhật dữ liệu')</script>";
+            $sql = "update qttk set matkhau='$matkhau',quyen='$quyen' where tentk='$tentk'";
+            $conn->exec($sql);
+            $conn=null;             
+            echo "<script>alert('đã cập nhật dữ liệu')</script>";
+            }
+        } catch (PDOException $e) {
+            echo "connection failed: " . $e->getMessage();
         }
-    } catch (PDOException $e) {
-        echo "connection failed: " . $e->getMessage();
     }
-}
+    
 // DONE
 function update_password($tentk, $matkhau, $matkhaumoi)
 {

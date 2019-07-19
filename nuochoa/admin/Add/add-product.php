@@ -42,12 +42,23 @@
                             Swal.fire({
                                 type: 'success',
                                 title: 'Thêm sản phẩm thành công !',
-                                showConfirmButton: false,
                                 timer: 1000
                             });
                         }, 100);
                     </script>
                 ";
+                $_SESSION['Masp'] = '';
+                $_SESSION['Maloai'] = '';
+                $_SESSION['Mancc'] = '';
+                $_SESSION['dungtich'] = '';
+                $_SESSION['ngaynhap'] = '';
+                $_SESSION['ngaysanxuat'] = '';
+                $_SESSION['hansudung'] = '';
+                $_SESSION['tensanpham'] = '';
+                $_SESSION['gia'] = '';
+                $_SESSION['trangthai'] = '';
+                $_SESSION['mota'] = '';
+                $_SESSION['soluong'] = '';
             }
             catch(Throwable $th){}
         }
@@ -104,7 +115,6 @@
                     }
                 ?>
             </div>
-
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="inputState">Mã loại <span style="color:red;">(*)</span>:</label>
@@ -315,7 +325,6 @@
                         name="txtSoluong"
                         value="<?php if (isset($_SESSION['soluong'] )) { echo $_SESSION['soluong']; }?>"
                     >
-
                     <div class="showErr" style="height:24px;width:100%;">
                         <?php
                             if ($_SERVER["REQUEST_METHOD"] == "POST") {
