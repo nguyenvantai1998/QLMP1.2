@@ -43,6 +43,10 @@
         {  
             include('search.php');
         }
+        else if($page == 'register-customer')
+        {  
+            include('form.php');
+        }
     }
     else
     { ?>

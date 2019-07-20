@@ -98,7 +98,7 @@
                     </ul>
                 </div>
             </li>
-            
+
             <li>
                 <a href="?p=page&&tt=sale">SP KHUYẾN MÃI</a>
             </li>
@@ -107,6 +107,9 @@
             </li>
             <li>
                 <a href="?p=page&&tt=selling">SP BÁN CHẠY</a>
+            </li>
+            <li>
+                <a href="?p=register-customer">ĐKKH</a>
             </li>
             <li>
                 <a href="#">BLOG</a>
@@ -121,7 +124,7 @@
     <div class="phone">
         <ul>
             <li>
-                <a href="#">
+                <a href="tel:+84907364216">
                     <div class="icon">
                         <div>
                             <i class="fas fa-phone-volume"></i>
@@ -132,7 +135,7 @@
                             Đặt hàng: (8h30 - 21h30)
                         </div>
                         <div class="telephone">
-                            1800 6047
+                            0907.364.216
                         </div>
                     </div>
                 </a>

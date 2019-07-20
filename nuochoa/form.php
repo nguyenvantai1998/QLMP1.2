@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Perfume</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/swiper.min.css">
     <!-- page -->
     <link rel="stylesheet" href="./assets/css/style.css">
@@ -58,7 +59,8 @@
                                 <div class="form-group row">
                                     <label for="inputPassword3" class="col-sm-2 col-form-label">Họ và Tên</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="Viết hoa không dấu">
+                                        <input type="text" class="form-control" placeholder="Viết hoa không dấu"
+                                            name="name-custom">
                                     </div>
                                 </div>
                                 <!-- GENDER -->
@@ -67,11 +69,13 @@
                                         <legend class="col-form-label col-sm-2 pt-0">Giới tính</legend>
                                         <div class="col-sm-10">
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" value="male" checked>
+                                                <input class="form-check-input" type="radio" name="gender" value="male"
+                                                    checked>
                                                 <label class="form-check-label" for="inlineRadio1">NAM</label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" value="fmale">
+                                                <input class="form-check-input" type="radio" name="gender"
+                                                    value="fmale">
                                                 <label class="form-check-label" for="inlineRadio1">NỮ</label>
                                             </div>
                                         </div>
@@ -81,7 +85,8 @@
                                 <div class="form-group row">
                                     <label for="inputPassword3" class="col-sm-2 col-form-label">Mã số CMND</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="0920xxx">
+                                        <input type="text" class="form-control" placeholder="0920xxx"
+                                            name="code-certificate">
                                     </div>
                                 </div>
                                 <!-- PICTURE UPLOAD -->
@@ -93,9 +98,11 @@
                                 </div>
                                 <!-- BIRTHDAY -->
                                 <div class="form-group row">
-                                    <label for="inputPassword3" class="col-sm-2 col-form-label">Ngày sinh<i class="fas fa-signal-slash    "></i></label>
+                                    <label for="inputPassword3" class="col-sm-2 col-form-label">Ngày sinh<i
+                                            class="fas fa-signal-slash    "></i></label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" placeholder="Viết hoa không dấu">
+                                        <input type="date" class="form-control" placeholder="Viết hoa không dấu"
+                                            name="date" value="<?php echo date("Y-m-d")?>">
                                     </div>
                                 </div>
                                 <!-- PHONE -->
@@ -109,7 +116,8 @@
                                 <div class="form-group row">
                                     <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail3" placeholder="abc@gmai.com">
+                                        <input type="email" class="form-control" id="inputEmail3"
+                                            placeholder="abc@gmai.com">
                                     </div>
                                 </div>
                                 <!--REGISTER ADDRESS ALWAY -->
@@ -118,25 +126,36 @@
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" placeholder="92 Nguyễn Trãi...">
                                         <div class="form-row">
-                                            <div class="form-group col-md-4">
-                                                <label for="inputState">Phường</label>
-                                                <select id="inputState" class="form-control">
-                                                    <option selected>Choose...</option>
-                                                    <option>...</option>
+                                        <div class="form-group col-md-4">
+                                                <label for="inputCity">tỉnh/thành</label>
+                                                <select id="inputCity" class="form-control" name="City">
+                                                <?php
+                                                        $tableTp = query_select("SELECT * FROM devvn_tinhthanhpho");
+                                                        $countTp = $tableTp->rowCount();
+                                                        if ($countTp > 0) {
+                                                        foreach ($tableTp as $rowTp) {
+                                                        ?>
+                                                            <option value="<?php echo $rowTp['matp'] ?>"><?php echo $rowTp['name'];?></option>
+                                                            <?php
+                                                        }
+                                                        }
+                                                        else
+                                                        {
+                                                        echo "<option value=''>Chưa có thành phố</option>";
+                                                        }
+                                                ?>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <label for="inputState">Quận</label>
-                                                <select id="inputState" class="form-control">
-                                                    <option selected>Choose...</option>
-                                                    <option>...</option>
+                                                <label for="district">quận/huyện</label>
+                                                <select class="form-control" id="district">
+                                                <option  value="">Chọn thành phố trước</option> 
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <label for="inputState">Thành phố</label>
-                                                <select id="inputState" class="form-control">
-                                                    <option selected>Choose...</option>
-                                                    <option>...</option>
+                                                <label for="ward">phường/xã/thị trấn</label>
+                                                <select class="form-control" id="ward">
+                                                <option  value=""></option> 
                                                 </select>
                                             </div>
                                         </div>
@@ -177,7 +196,9 @@
                                     <div class="col-sm-2">Thông tin khác</div>
                                     <div class="col-sm-10">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="gridCheck1" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                            <input class="form-check-input" type="checkbox" id="gridCheck1"
+                                                data-toggle="collapse" data-target="#collapseExample"
+                                                aria-expanded="false" aria-controls="collapseExample">
                                             <label class="form-check-label" for="gridCheck1">
                                                 Người bảo trợ
                                             </label>
@@ -186,10 +207,12 @@
                                                     <form>
                                                         <div class="form-row">
                                                             <div class="col">
-                                                                <input type="text" class="form-control" placeholder="Mã số người bảo trợ">
+                                                                <input type="text" class="form-control"
+                                                                    placeholder="Mã số người bảo trợ">
                                                             </div>
                                                             <div class="col">
-                                                                <input type="text" class="form-control" placeholder="Tên người bảo trợ">
+                                                                <input type="text" class="form-control"
+                                                                    placeholder="Tên người bảo trợ">
                                                             </div>
                                                         </div>
                                                     </form>
@@ -231,9 +254,11 @@
 
     <!-- js -->
     <script src="./assets/js/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
     </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <script src="./assets/js/swiper.min.js"></script>
     <script src="./assets/js/custome.js"></script>
