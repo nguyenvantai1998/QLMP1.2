@@ -25,9 +25,13 @@
         <!-- small box -->
         <div class="small-box bg-warning">
             <div class="inner">
-                <h3>100</h3>
+            <?php
+                $table = query_select("SELECT * FROM tintuc");
+                $count = $table->rowCount();
+                echo '<h3>'.$count.'</h3>';
+            ?>
 
-                <p>Số lượng</p>
+                <p>Tin tức...</p>
             </div>
             <div class="icon">
                 <i class="ion ion-android-list"></i>

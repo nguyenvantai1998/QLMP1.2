@@ -50,37 +50,35 @@ function update_password($tentk, $matkhau, $matkhaumoi)
 {
     try {
         include '../connect.php';
-        // include '.\..\..\select.php';
-        $table=query_select("select * from qttk where tentk='".$tentk."' and matkhau='".$matkhau."'");
+        $table=query_select("SELECT * FROM qttk WHERE qttk.TenTK ='".$tentk."' AND qttk.Matkhau ='".$matkhau."'");
         $count=$table->rowCount();
         if ($count==0)
             {
                 echo '<script type="text/javascript">';
-
-                echo "setTimeout(function () { Swal.fire({
-                      type: 'error',
-                      title: 'Sai mật khẩu !',
-                      showConfirmButton: false,
-                      timer: 1500
-                      });";
-
-                echo '}, 1000);</script>';
+                echo "
+                setTimeout(function () { 
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Mật khẩu cũ nhập sai !',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });";
+                echo '});</script>';
             }
-        else {
+        else 
+        {
+            $sql = "UPDATE qttk SET Matkhau = '$matkhaumoi' WHERE qttk.TenTK = '$tentk'";
+            $conn->exec($sql);
+            $conn=null;             
+            echo '<script type="text/javascript">';
 
-        $sql = "update qttk set matkhau='$matkhaumoi' where tentk='$tentk'";
-        $conn->exec($sql);
-        $conn=null;             
-                echo '<script type="text/javascript">';
-
-                echo "setTimeout(function () { Swal.fire({
-                      type: 'success',
-                      title: 'Đã đổi mật khẩu !',
-                      showConfirmButton: false,
-                      timer: 1500
-                      });";
-
-                echo '}, 500);</script>';
+            echo "setTimeout(function () { Swal.fire({
+                    type: 'success',
+                    title: 'Đổi mật khẩu thành công!',
+                    showConfirmButton: false,
+                    timer: 1500
+                    });";
+            echo '});</script>';
         }
     } catch (PDOException $e) {
         echo "connection failed: " . $e->getMessage();

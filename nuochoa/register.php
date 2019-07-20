@@ -8,7 +8,7 @@
                 $userReg = $_POST['user-reg'];
                 $passwordReg = $_POST['password-reg'];
 			        	$rePasswordReg = $_POST['re-password-reg'];
-		         		insert_admin($userReg, $passwordReg,"2");
+		         		insert_admin($userReg, md5($passwordReg),"2");
             } catch (Throwable $th) {
             }
         } else {

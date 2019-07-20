@@ -10,13 +10,16 @@ session_start();
         }
     }
     if (isset($_POST["submit"])) {
-        if ($_POST['user'] != "" && $_POST['password'] != "") {
-            try {    
+        if ($_POST['user'] != "" && $_POST['password'] != "") 
+        {
+            try 
+            {    
+                $_SESSION['userSession'] = $_POST['user'];
                 $user = $_POST['user'];
-                $password = $_POST['password'];
+                $password = md5($_POST['password']);
+                // $password = $_POST['password'];
                 $query = query_select("select * from qttk where qttk.TenTK='$user' and qttk.Matkhau='$password'");
                 $count = $query->rowCount();
-                // echo $count;
                 if($count==0){
                     echo '<script type="text/javascript">';
 
@@ -28,48 +31,37 @@ session_start();
                       });";
             
                     echo '}, 1000);</script>';
-                }else{
-
-                    // $query = query_select("select * from qttk where qttk.TenTK='$user' and qttk.Matkhau='$password'");
-                    // $count = $query->rowCount();
-                    // echo $count;
-                    // if($count==0){
-foreach($query as $row){
-    $session_id = $row['Quyen'];
-    // echo $session_id;
-    if( $session_id == 1){
-        header("location:admin/indexAdmin.php");
-    }else{
-        echo '<script type="text/javascript">';
-
-                    echo "setTimeout(function () { Swal.fire({
-                        type: 'success',
-                        title: 'Đăng nhập thành công',
-                        showConfirmButton: false,
-                        timer: 1500
-                      });";
-            
-                    echo '}, 1);</script>';
-    }
-}
+                }
+                else
+                {
+                    foreach($query as $row){
+                        $session_id = $row['Quyen'];
+                        if( $session_id == 1){
+                            header("location:admin/indexAdmin.php");
+                            $_SESSION['level'] = $row['Quyen'];
+                            $_SESSION['ten_taikhoan'] = $row['TenTK'];
+                        }
+                    }
                     
                 }
-            } catch (Throwable $th) {
-            }
-        } else {
+            } 
+            catch (Throwable $th) { }
+        } 
+        else 
+        {
             echo '<script type="text/javascript">';
     
-            echo "setTimeout(function () { Swal.fire({
-                type: 'error',
-                title: 'Nhập đầy đủ các trường !',
-                showConfirmButton: false,
-                timer: 1500
-              });";
-    
+            echo "
+            setTimeout(function () { 
+                Swal.fire({
+                    type: 'error',
+                    title: 'Nhập đầy đủ các trường !',
+                    showConfirmButton: false,
+                    timer: 1500
+                });";
             echo '}, 1000);</script>';
         }
     }
-    
 ?>
 <!DOCTYPE html>
 <html>
@@ -94,6 +86,7 @@ foreach($query as $row){
 </head>
 
 <body class="hold-transition login-page">
+
     <div class="login-box">
         <div class="login-logo">
             <a href="#"><b>Admin</b>LTE</a>
@@ -130,17 +123,6 @@ foreach($query as $row){
                     </div>
                 </form>
 
-                <!-- <div class="social-auth-links text-center mb-3">
-        <p>- OR -</p>
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fa fa-facebook mr-2"></i> Sign in using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fa fa-google-plus mr-2"></i> Sign in using Google+
-        </a>
-      </div> -->
-                <!-- /.social-auth-links -->
-
                 <p class="mb-1">
                     <a href="#">I forgot my password</a>
                 </p>
@@ -151,7 +133,6 @@ foreach($query as $row){
             <!-- /.login-card-body -->
         </div>
     </div>
-    <!-- /.login-box -->
 
     <!-- jQuery -->
     <script src="./assets/js/plugins/jquery/jquery.min.js"></script>

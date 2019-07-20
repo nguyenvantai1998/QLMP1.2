@@ -4,9 +4,12 @@
         <!-- small box -->
         <div class="small-box bg-warning">
             <div class="inner">
-                <h3>100</h3>
-
-                <p>Số lượng</p>
+            <?php
+                $table = query_select("SELECT * FROM sp");
+                $count = $table->rowCount();
+                echo '<h3>'.$count.'</h3>';
+            ?>
+                <p>Sản phẩm...</p>
             </div>
             <div class="icon">
                 <i class="ion ion-android-list"></i>

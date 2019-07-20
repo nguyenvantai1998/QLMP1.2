@@ -25,9 +25,13 @@
         <!-- small box -->
         <div class="small-box bg-warning">
             <div class="inner">
-                <h3>100</h3>
+            <?php
+                $table = query_select("SELECT * FROM ctkm");
+                $count = $table->rowCount();
+                echo '<h3>'.$count.'</h3>';
+            ?>
 
-                <p>Số lượng</p>
+                <p>Chương trình khuyến mãi...</p>
             </div>
             <div class="icon">
                 <i class="ion ion-android-list"></i>
@@ -78,8 +82,6 @@
                 <th>STT</th>
                 <th>Mã Khuyến mãi</th>
                 <th>Sản phẩm KM</th>
-                <th>Thời gian bắt đầu</th>
-                <th>Thời gian kết thúc</th>
                 <th>Tỉ lệ giảm giá</th>
                 <th>Số thành viên</th>
                 <th>Ghi chú</th>
@@ -100,8 +102,6 @@
                 <td><?php echo $stt++; ?></td>
                 <td><?php echo $row['MaKm'] ?></td>
                 <td><?php echo $row['MaSP'] ?></td>
-                <td><?php echo $row['TGBD'] ?></td>
-                <td><?php echo $row['TGKT'] ?></td>
                 <td><?php echo $row['Tilegiamgia'] ?></td>
                 <td><?php echo $row['member'] ?></td>
                 <td><?php echo $row['Ghichu'] ?></td>

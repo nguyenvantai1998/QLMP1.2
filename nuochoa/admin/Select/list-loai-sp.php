@@ -4,9 +4,12 @@
         <!-- small box -->
         <div class="small-box bg-warning">
             <div class="inner">
-                <h3>100</h3>
-
-                <p>Số lượng</p>
+            <?php
+                $table = query_select("SELECT * FROM loaisp");
+                $count = $table->rowCount();
+                echo '<h3>'.$count.'</h3>';
+            ?>
+                <p>Loại sản phẩm...</p>
             </div>
             <div class="icon">
                 <i class="ion ion-android-list"></i>
@@ -54,7 +57,6 @@
     <table class="table table-hover text-center">
         <thead>
             <tr>
-                <th>STT</th>
                 <th>Mã Loại</th>
                 <th>Tên Loại</th>
                 <th>Mô tả</th>
@@ -66,13 +68,11 @@
         <?php
             $table = query_select("SELECT * FROM loaisp");
             $count = $table->rowCount();
-            $stt = 1;
             if ($count > 0) {
                 foreach ($table as $row) {
         ?>
 
             <tr>
-                <td><?php echo $stt++; ?></td>
                 <td><?php echo $row['MaLoai'] ?></td>
                 <td><?php echo $row['TenLoai'] ?></td>
                 <td>

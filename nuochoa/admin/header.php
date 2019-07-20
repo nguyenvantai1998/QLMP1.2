@@ -13,13 +13,14 @@
   if($_SESSION['helloTitle']==1){
       echo '<script type="text/javascript">';
 
-      echo "setTimeout(function () { Swal.fire({
-      type: 'success',
-      title: 'Chào mừng ADMIN !',
-      showConfirmButton: false,
-      timer: 1000
-      });";
-
+      echo "
+      setTimeout(function () { 
+        Swal.fire({
+          type: 'success',
+          title: 'Chào mừng ADMIN !',
+          showConfirmButton: false,
+          timer: 1000
+        });";
       echo '}, 1000);</script>';
       $_SESSION['helloTitle'] = 0;
   }

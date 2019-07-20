@@ -19,14 +19,13 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v2</li>
+                        <li class="breadcrumb-item"><a href="indexAdmin.php"><i class="fas fa-home"></i> Home Admin</a></li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+                </div>
+            </div>
+        </div>
+    </div><!-- /.content-header -->
+    
 
     <!-- Main content -->
     <section class="content">
@@ -68,6 +67,15 @@
                     {
                         include("./Upload/upload.php");
                     }
+                    // CATEGORY
+                    else if($page=='loai_sp')
+                    {
+                        include("./Select/list-loai-sp.php");
+                    }
+                    else if($page=='them_loai')
+                    {
+                        include("./Add/add-category.php");
+                    }
                     // CTKM
                     else if($page=='list_ct_km')
                     {
@@ -92,15 +100,6 @@
                     }else if($page=='them_km')
                     {
                         include("./Add/add-km.php");
-                    }
-                    // CATEGORY
-                    else if($page=='loai_sp')
-                    {
-                        include("./Select/list-loai-sp.php");
-                    }
-                    else if($page=='them_loai')
-                    {
-                        include("./Add/add-category.php");
                     }
                     // NEWS - DONE
                     else if($page=='list_tin_tuc')
